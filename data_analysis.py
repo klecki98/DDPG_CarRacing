@@ -39,10 +39,13 @@ if __name__ == "__main__":
                 for batch_size in results_dict[alpha][beta][tau]:
                     for hidden in results_dict[alpha][beta][tau][batch_size]:
                         plt.figure()
+                        pre = 'Moving average of scores over 100 episodes\n'
                         title = 'alpha_' + str(alpha) + '_beta_' + \
                                str(beta) + '_tau_' + str(tau) + '_batch_' + str(batch_size) + \
                                '_hidden_' + str(hidden)
-                        plt.title(title)
+                        plt.title(pre+title)
+                        plt.xlabel('Iteration')
+                        plt.ylabel('Score')
                         for i in range(len(results_dict[alpha][beta][tau][batch_size][hidden])):
                             temp = results_dict[alpha][beta][tau][batch_size][hidden][i]
                             window = 100

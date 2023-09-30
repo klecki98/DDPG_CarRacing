@@ -34,6 +34,14 @@ class Agent():
         self.actor.train()
         return mu_noisy.cpu().detach().numpy()[0]
 
+    def choose_action_no_noise(self, observation):
+        self.actor.eval()
+        observation_tensor = T.tensor([observation], dtype=T.float).to(self.actor.device)
+        mu = self.actor.forward(observation_tensor).to(self.actor.device)
+        # mu_noisy = mu + T.tensor(self.noise(), dtype=T.float).to(self.actor.device)
+        self.actor.train()
+        return mu.cpu().detach().numpy()[0]
+
     def save_transition(self, observation, action, reward, observation_, done):
         self.replay_buffer.store(observation,action,reward,observation_,done)
 
